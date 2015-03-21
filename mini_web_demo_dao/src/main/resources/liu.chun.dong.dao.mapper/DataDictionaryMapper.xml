@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="liu.chun.dong.dao.mapper.DataDictionaryMapper">
+    <sql id="selectColumns">
+        id as id,
+        num as num,
+        cross_street_name as crossStreetName,
+        direction_movement as directionMovement,
+        explanation as explanation
+	</sql>
+
+    <select id="getDataDictionaryList" resultType="liu.chun.dong.dao.entity.DataDictionaryEntity">
+        select
+        <include refid="selectColumns"/>
+        from
+        data_dictionary
+    </select>
+
+</mapper>

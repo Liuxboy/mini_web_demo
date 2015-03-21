@@ -2,34 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="liu.chun.dong.dao.mapper.BannerMapper">
+<mapper namespace="liu.chun.dong.dao.mapper.TestMapper">
     <sql id="selectColumns">
-        id as id,
-        banner_num as bannerNum,
-        banner_sequence as bannerSequence,
-        banner_name as bannerName,
-        client_name as clientName,
-        banner_url as bannerUrl,
-        banner_img_url as bannerImgUrl,
-        banner_status as bannerStatus,
-        publish_time as pubTime,
-        time_interval as timeInterval,
-        created_time as createdTime,
-        modified_time as modifiedTime,
-        create_user as createUser,
-        modify_user as modifyUser
+        id as id
 	</sql>
 
-    <select id="getBannerList" resultType="liu.chun.dong.dao.entity.BannerEntity">
+    <select id="getBannerList" resultType="liu.chun.dong.dao.entity.TestEntity">
         select
         <include refid="selectColumns"/>
         from
-        banner_config
-        where banner_status=1
-        and client_name=#{clientName}
-        ORDER BY banner_sequence
-        asc
-        LIMIT 0,5
     </select>
 
 </mapper>
