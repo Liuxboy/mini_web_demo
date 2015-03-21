@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                            http://www.springframework.org/schema/mvc
+                            http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+       default-lazy-init="true" default-autowire="byName">
+
+    <!-- 启用spring mvc 注解 -->
+    <context:annotation-config/>
+    <!-- 1：对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
+    <context:component-scan base-package="liu.chun.dong.web"/>
+    <!-- 2: 完成请求和注解POJO的映射 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+    <!-- 3：默认注解，一定不要忘记-->
+    <mvc:annotation-driven/>
+
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/jsp/**" location="/jsp/"/>
+
+    <!-- 3：对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/jsp/" p:suffix=".jsp"/>
+    <!-- 4：图片上传,Excel上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="utf-8">
+        <!-- set the max upload size100MB -->
+        <property name="maxUploadSize">
+            <value>104857600</value>
+        </property>
+    </bean>
+    <!-- 4：配置拦截ctrl的参数 -->
+    <bean class="liu.chun.dong.web.interceptor.ParamNotValidExpcetionResolver"/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="baseInterceptor" class="liu.chun.dong.web.interceptor.BaseInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

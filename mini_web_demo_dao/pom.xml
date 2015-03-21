@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>mini.web.demo</groupId>
+        <artifactId>mini_web_demo</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <groupId>mini.web.demo</groupId>
+    <artifactId>mini_web_demo_dao</artifactId>
+    <name>mini_web_demo_dao</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- 项目内部包依赖开始 -->
+        <dependency>
+            <groupId>mini.web.demo</groupId>
+            <artifactId>mini_web_demo_common</artifactId>
+        </dependency>
+        <!-- 项目内部包依赖结束 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+    </dependencies>
+</project>

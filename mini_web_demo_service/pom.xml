@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>mini.web.demo</groupId>
+        <artifactId>mini_web_demo</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>mini.web.demo</groupId>
+    <artifactId>mini_web_demo_service</artifactId>
+    <name>mini_web_demo_service</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- 项目内部依赖模块 -->
+        <dependency>
+            <groupId>mini.web.demo</groupId>
+            <artifactId>mini_web_demo_common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mini.web.demo</groupId>
+            <artifactId>mini_web_demo_domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mini.web.demo</groupId>
+            <artifactId>mini_web_demo_dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mini.web.demo</groupId>
+            <artifactId>mini_web_demo_rpc</artifactId>
+        </dependency>
+
+        <!-- 项目外部依赖包 -->
+
+    </dependencies>
+</project>
