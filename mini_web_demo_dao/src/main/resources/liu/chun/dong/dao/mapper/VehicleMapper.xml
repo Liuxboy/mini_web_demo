@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="liu.chun.dong.dao.mapper.VehicleMapper">
+    <sql id="selectColumns">
+        id as id,
+        simtime as simtime,
+        car_type as carType,
+        speed as speed,
+        desspeed as desspeed,
+        linkid as linkid,
+        laneid as laneid,
+        nextlink as nextlink,
+        linkpos as linkpos,
+        inqueue as inqueue,
+        stops as stops,
+        delaytm as delaytm,
+        x as x,
+        y as y,
+        travel_time_t as travelTimet,
+        delay_t as delayT,
+        segment_id as segmentId
+	</sql>
+
+    <select id="getVehicleList" resultType="liu.chun.dong.dao.entity.VehicleEntity">
+        select
+        <include refid="selectColumns"/>
+        from
+        vehicle
+    </select>
+
+    <select id="getVehicleById" parameterType="java.lang.Integer" resultType="liu.chun.dong.dao.entity.VehicleEntity">
+        select
+        <include refid="selectColumns"/>
+        from
+        vehicle
+        where
+        id=#{id}
+        ORDER BY simtime ASC
+    </select>
+
+    <select id="getVehicleByTime" parameterType="java.lang.Integer" resultType="liu.chun.dong.dao.entity.VehicleEntity">
+        select
+        <include refid="selectColumns"/>
+        from
+        vehicle
+        where
+        simtime=#{simTime}
+    </select>
+
+    <select id="getVehicleByIdAndTime" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
+        select
+        <include refid="selectColumns"/>
+        from
+        vehicle
+        where
+        true
+        <if test="id != null">
+            and id=#{id}
+        </if>
+        <if test="simTime != null">
+            and simtime=#{simTime}
+        </if>
+    </select>
+
+    <select id="getVehicleListByTimeAndSegment" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
+        select
+        <include refid="selectColumns"/>
+        from
+        vehicle
+        where
+        true
+        <if test="simTime != null">
+            and simtime=#{simTime}
+        </if>
+        <if test="segmentId != null">
+            and segment_id=#{segmentId}
+        </if>
+    </select>
+
+    <select id="getMaxVehicleId" resultType="Integer">
+        SELECT
+        MAX(id)
+        FROM vehicle;
+    </select>
+    <select id="getMaxTime" resultType="Integer">
+        SELECT
+        MAX(simtime)
+        FROM vehicle;
+    </select>
+    <select id="getVehicleByTimeAndLink" parameterType="Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
+        SELECT
+        <include refid="selectColumns" />
+        FROM
+        vehicle
+        WHERE
+        true
+        <if test="simTime != null">
+            and simtime = #{simTime}
+        </if>
+        <if test="linkid != null">
+            and linkid = #{linkid}
+        </if>
+
+    </select>
+
+    <update id="update" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
+        update
+        vehicle
+        set
+        segment_id = #{segmentId},
+        travel_time_t = #{travelTimet},
+        delay_t = #{delayT}
+        where
+        simtime &gt;= #{startTime}
+        and
+        simtime &lt; #{endTime}
+        and
+        id = #{id}
+    </update>
+
+
+    <select id="getAVG" resultType="liu.chun.dong.dao.entity.MiddleEntity">
+        SELECT
+        AVG(travel_time_t) AS travel_time_ba,
+        AVG(delay_t) AS delay_ba
+        FROM
+        vehicle
+        WHERE
+        simtime = #{simTime}
+        AND
+        segment_id = #{segmentId}
+    </select>
+    <select id="getAVGMap" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.MiddleEntity">
+        SELECT
+        AVG(travel_time_t) AS travel_time_ba,
+        AVG(delay_t) AS delay_ba
+        FROM
+        vehicle
+        WHERE
+        simtime = #{simTime}
+        AND
+        segment_id = #{segmentId}
+    </select>
+    <insert id="insert" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
+        insert into
+        middle
+        (
+        simtime,
+        segment_id,
+        travel_time_ba,
+        delay_ba
+        )
+        values
+        (
+        #{simTime},
+        #{segmentId},
+        #{travelTimet},
+        #{delayT}
+        )
+    </insert>
+
+</mapper>

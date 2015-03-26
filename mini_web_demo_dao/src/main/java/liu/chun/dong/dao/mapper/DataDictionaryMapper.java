@@ -6,5 +6,5 @@ package liu.chun.dong.dao.mapper;
  * @date 2015/3/21 11:54
  * @comment DataDictionaryMapper
  */
-public class DataDictionaryMapper {
+public interface DataDictionaryMapper {
 }

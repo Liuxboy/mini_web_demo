@@ -5,39 +5,47 @@ import java.io.Serializable;
 /**
  * @author wyliuchundong
  * @version 1.0.0
- * @date 2015/3/21 11:48
+ * @date 2015/3/21 16:48
  * @comment VehicleEntity
  */
 public class VehicleEntity implements Serializable {
 
     private static final long serialVersionUID = 6742139941804090924L;
-    private Long simTime;
-    private Long id;
+    private Integer simTime;
+    private Integer id;
     private Integer carType;
     private Double speed;
     private Double desspeed;
-    private Long linkid;
-    private Long laneid;
-    private Long nextlink;
-    private Integer lnqueue;
+    private Integer linkid;
+    private Integer laneid;
+    private String nextlink;
+    private double linkpos;
+    private Integer inqueue;
     private Integer stops;
-    private Double delaytm;
-    private Double x;
-    private Double y;
+    private double delaytm;
+    private double x;
+    private double y;
 
-    public Long getSimTime() {
+    private double travelTimet;
+    private double delayT;
+    private int segmentId;
+
+    private int startTime;
+    private int endTime;
+
+    public Integer getSimTime() {
         return simTime;
     }
 
-    public void setSimTime(Long simTime) {
+    public void setSimTime(Integer simTime) {
         this.simTime = simTime;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,36 +73,44 @@ public class VehicleEntity implements Serializable {
         this.desspeed = desspeed;
     }
 
-    public Long getLinkid() {
+    public Integer getLinkid() {
         return linkid;
     }
 
-    public void setLinkid(Long linkid) {
+    public void setLinkid(Integer linkid) {
         this.linkid = linkid;
     }
 
-    public Long getLaneid() {
+    public Integer getLaneid() {
         return laneid;
     }
 
-    public void setLaneid(Long laneid) {
+    public void setLaneid(Integer laneid) {
         this.laneid = laneid;
     }
 
-    public Long getNextlink() {
+    public String getNextlink() {
         return nextlink;
     }
 
-    public void setNextlink(Long nextlink) {
+    public void setNextlink(String nextlink) {
         this.nextlink = nextlink;
     }
 
-    public Integer getLnqueue() {
-        return lnqueue;
+    public double getLinkpos() {
+        return linkpos;
     }
 
-    public void setLnqueue(Integer lnqueue) {
-        this.lnqueue = lnqueue;
+    public void setLinkpos(double linkpos) {
+        this.linkpos = linkpos;
+    }
+
+    public Integer getInqueue() {
+        return inqueue;
+    }
+
+    public void setInqueue(Integer inqueue) {
+        this.inqueue = inqueue;
     }
 
     public Integer getStops() {
@@ -105,28 +121,69 @@ public class VehicleEntity implements Serializable {
         this.stops = stops;
     }
 
-    public Double getDelaytm() {
+    public double getDelaytm() {
         return delaytm;
     }
 
-    public void setDelaytm(Double delaytm) {
+    public void setDelaytm(double delaytm) {
         this.delaytm = delaytm;
     }
 
-    public Double getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(Double x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public Double getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(Double y) {
+    public void setY(double y) {
         this.y = y;
+    }
+
+    public double getTravelTimet() {
+        return travelTimet;
+    }
+
+    public void setTravelTimet(double travelTimet) {
+        this.travelTimet = travelTimet;
+    }
+
+    public double getDelayT() {
+        return delayT;
+    }
+
+    public void setDelayT(double delayT) {
+        this.delayT = delayT;
+    }
+
+    public int getSegmentId() {
+        return segmentId;
+    }
+
+    public void setSegmentId(int segmentId) {
+        this.segmentId = segmentId;
+    }
+
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
+
+    public int getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -139,12 +196,18 @@ public class VehicleEntity implements Serializable {
                 ", desspeed=" + desspeed +
                 ", linkid=" + linkid +
                 ", laneid=" + laneid +
-                ", nextlink=" + nextlink +
-                ", lnqueue=" + lnqueue +
+                ", nextlink='" + nextlink + '\'' +
+                ", linkpos=" + linkpos +
+                ", inqueue=" + inqueue +
                 ", stops=" + stops +
                 ", delaytm=" + delaytm +
                 ", x=" + x +
                 ", y=" + y +
+                ", travelTimet=" + travelTimet +
+                ", delayT=" + delayT +
+                ", segmentId=" + segmentId +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 '}';
     }
 }

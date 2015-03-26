@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author wyliuchundong
  * @version 1.0.0
- * @date 2015/3/21 11:45
+ * @date 2015/3/21 16:48
  * @comment SegmentInfoEntity
  */
 public class SegmentInfoEntity implements Serializable {
@@ -14,9 +14,11 @@ public class SegmentInfoEntity implements Serializable {
     private int segmentId;
     private int interserctionId;
     private String travelDirection;
-    private String startLink;
-    private String endLink;
-    private String nextLink;
+    private int startLink;
+    private int endLink;
+    private int nextLink;
+    private double travel_time_ba;
+    private double delay_ba;
 
     public int getId() {
         return id;
@@ -50,28 +52,44 @@ public class SegmentInfoEntity implements Serializable {
         this.travelDirection = travelDirection;
     }
 
-    public String getStartLink() {
+    public int getStartLink() {
         return startLink;
     }
 
-    public void setStartLink(String startLink) {
+    public void setStartLink(int startLink) {
         this.startLink = startLink;
     }
 
-    public String getEndLink() {
+    public int getEndLink() {
         return endLink;
     }
 
-    public void setEndLink(String endLink) {
+    public void setEndLink(int endLink) {
         this.endLink = endLink;
     }
 
-    public String getNextLink() {
+    public int getNextLink() {
         return nextLink;
     }
 
-    public void setNextLink(String nextLink) {
+    public void setNextLink(int nextLink) {
         this.nextLink = nextLink;
+    }
+
+    public double getTravel_time_ba() {
+        return travel_time_ba;
+    }
+
+    public void setTravel_time_ba(double travel_time_ba) {
+        this.travel_time_ba = travel_time_ba;
+    }
+
+    public double getDelay_ba() {
+        return delay_ba;
+    }
+
+    public void setDelay_ba(double delay_ba) {
+        this.delay_ba = delay_ba;
     }
 
     @Override
@@ -81,9 +99,11 @@ public class SegmentInfoEntity implements Serializable {
                 ", segmentId=" + segmentId +
                 ", interserctionId=" + interserctionId +
                 ", travelDirection='" + travelDirection + '\'' +
-                ", startLink='" + startLink + '\'' +
-                ", endLink='" + endLink + '\'' +
-                ", nextLink='" + nextLink + '\'' +
+                ", startLink=" + startLink +
+                ", endLink=" + endLink +
+                ", nextLink=" + nextLink +
+                ", travel_time_ba=" + travel_time_ba +
+                ", delay_ba=" + delay_ba +
                 '}';
     }
 }
