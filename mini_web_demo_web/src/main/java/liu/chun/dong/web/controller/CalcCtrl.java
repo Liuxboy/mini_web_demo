@@ -42,6 +42,7 @@ public class CalcCtrl {
     @RequestMapping(value = "/calcSegment", method = RequestMethod.POST)
     public ModelAndView calcSegment(HttpServletRequest request, HttpServletResponse response) {
         boolean result = calcService.calcSegmentTravelTimeAndDelay();
+
         if (result)
             return new ModelAndView("/success");
         else
