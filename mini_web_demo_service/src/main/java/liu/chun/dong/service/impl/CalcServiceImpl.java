@@ -120,26 +120,6 @@ public class CalcServiceImpl implements CalcService {
                     map.put("segment",i);
                     map.put("simTime",j);
                     middleEntity =  vehicleMapper.getAVG(i, j);
-                    //middleEntity =  vehicleMapper.getAVGMap(map);
-                    /*
-                    list = vehicleMapper.getVehicleListByTimeAndSegment(map);
-                    //如果某时刻车辆不为0，则算个平均
-                    if (list != null && list.size() > 0) {
-                        int size = list.size();
-                        for (VehicleEntity entity : list) {
-                            travelTime += entity.getTravelTimet();
-                            delay += entity.getDelayT();
-                        }
-                        oldTravelTime = travelTime = travelTime / size;
-                        oldDelay = delay = delay / size;
-                        vehicleEntity.setTravelTimet(travelTime);
-                        vehicleEntity.setDelayT(delay);
-                    }
-                    //如果当前时间某segment没有车辆，则将上一次结果存入
-                    else {
-                        vehicleEntity.setTravelTimet(oldTravelTime);
-                        vehicleEntity.setDelayT(oldDelay);
-                    }*/
                     if (middleEntity != null){
                         oldTravelTime = travelTime = middleEntity.getTravel_time_ba();
                         oldDelay = delay = middleEntity.getDelay_ba();
