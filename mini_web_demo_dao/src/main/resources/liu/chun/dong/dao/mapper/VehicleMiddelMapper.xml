@@ -29,7 +29,7 @@
         AVG(travel_time_t) AS travel_time_ba,
         AVG(delay_t) AS delay_ba
         FROM
-        vehicle
+        vehicle_middle
         WHERE
         simtime &gt;= #{simTime}
         and
