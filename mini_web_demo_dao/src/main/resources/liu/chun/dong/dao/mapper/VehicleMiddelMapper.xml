@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="liu.chun.dong.dao.mapper.VehicleMiddleMapper">
+    <sql id="selectColumns">
+        id as id,
+        simtime as simtime,
+        segment_id as segmentId,
+        vehicle_id as vehicleId,
+        travel_time_t as travelTimet,
+        delay_t as delayT,
+        time_in as timeIn,
+        time_out as timeOut
+	</sql>
+    <select id="getAVG" resultType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
+        SELECT
+        AVG(travel_time_t) AS travel_time_ba,
+        AVG(delay_t) AS delay_ba
+        FROM
+        vehicle
+        WHERE
+        simtime = #{simTime}
+        AND
+        segment_id = #{segmentId}
+    </select>
+    <select id="getAVGMap" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
+        SELECT
+        AVG(travel_time_t) AS travel_time_ba,
+        AVG(delay_t) AS delay_ba
+        FROM
+        vehicle
+        WHERE
+        simtime &gt;= #{simTime}
+        and
+        simtime &lt; #{simTime}+15
+        AND
+        segment_id = #{segmentId}
+    </select>
+    <insert id="insert" parameterType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
+        insert into
+        vehicle_middle
+        (
+        simtime,
+        segment_id,
+        vehicle_id,
+        travel_time_t,
+        delay_t,
+        time_in,
+        time_out
+        )
+        values
+        (
+        #{simTime},
+        #{segmentId},
+        #{vehicleId},
+        #{travelTimet},
+        #{delayT},
+        #{timeIn},
+        #{timeOut}
+        )
+    </insert>
+
+</mapper>

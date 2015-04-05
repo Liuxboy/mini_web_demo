@@ -5,8 +5,10 @@ import liu.chun.dong.common.cp.LoggerFactory;
 import liu.chun.dong.dao.entity.MiddleEntity;
 import liu.chun.dong.dao.entity.SegmentInfoEntity;
 import liu.chun.dong.dao.entity.VehicleEntity;
+import liu.chun.dong.dao.entity.VehicleMiddleEntity;
 import liu.chun.dong.dao.mapper.SegmentInfoMapper;
 import liu.chun.dong.dao.mapper.VehicleMapper;
+import liu.chun.dong.dao.mapper.VehicleMiddleMapper;
 import liu.chun.dong.service.CalcService;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,8 @@ public class CalcServiceImpl implements CalcService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
     private VehicleMapper vehicleMapper;
+    @Resource
+    private VehicleMiddleMapper vehicleMiddleMapper;
     @Resource
     private SegmentInfoMapper segmentInfoMapper;
 
@@ -78,18 +82,19 @@ public class CalcServiceImpl implements CalcService {
 
                         //在如果找到某个segment,那么segment起止中的时刻，其traveltime与delay是一样的
                         if (inSegment != null) {
-                            VehicleEntity vehicleEntity = new VehicleEntity();
+                            VehicleMiddleEntity vehicleEntity = new VehicleMiddleEntity();
                             Result result = calcVehicleTravelTimeAndDelay(objectVehicle, moveVehicle);
                             int startTime = objectVehicle.getSimTime();
                             int endTime = moveVehicle.getSimTime();
                             int id = moveVehicle.getId();
-                            vehicleEntity.setId(id);
-                            vehicleEntity.setStartTime(startTime);
-                            vehicleEntity.setEndTime(endTime);
+                            vehicleEntity.setSimTime(startTime);
+                            vehicleEntity.setTimeIn(startTime);
+                            vehicleEntity.setTimeOut(endTime);
                             vehicleEntity.setTravelTimet(result.getTravelTime());
                             vehicleEntity.setDelayT(result.getDelay());
                             vehicleEntity.setSegmentId(inSegment.getSegmentId());
-                            vehicleMapper.update(vehicleEntity);
+                            vehicleEntity.setVehicleId(id);
+                            vehicleMiddleMapper.insert(vehicleEntity);
                             inSegment = null;
                             step = timeOut - timeIn;
                             logger.info("-----input the CardId: ",id,"-------");
@@ -114,12 +119,14 @@ public class CalcServiceImpl implements CalcService {
             VehicleEntity vehicleEntity = new VehicleEntity();
             double travelTime = 0.0, delay = 0.0;
             double oldTravelTime = 0.0, oldDelay = 0.0;
-            MiddleEntity middleEntity = new MiddleEntity();
+            MiddleEntity middleEntity;
             for (int i = 1; i <= 136; i++) {
-                for (int j = 1; j <= maxTime; j++) {
-                    map.put("segment",i);
-                    map.put("simTime",j);
-                    middleEntity =  vehicleMapper.getAVG(i, j);
+                for (int j = 1; j <= maxTime; j+=15) {
+                   /*
+                   map.put("segment",i);
+                   map.put("simTime",j);
+                   */
+                    middleEntity =  vehicleMiddleMapper.getAVG(i, j);
                     if (middleEntity != null){
                         oldTravelTime = travelTime = middleEntity.getTravel_time_ba();
                         oldDelay = delay = middleEntity.getDelay_ba();
