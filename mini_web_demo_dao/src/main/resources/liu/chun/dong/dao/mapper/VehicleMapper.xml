@@ -104,8 +104,8 @@
         </if>
 
     </select>
-
-    <update id="update" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
+    <!--第一次计算vehicle-->
+    <!--<update id="update" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
         update
         vehicle
         set
@@ -118,8 +118,19 @@
         simtime &lt; #{endTime}
         and
         id = #{id}
+    </update>-->
+    <update id="update" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
+        update
+        vehicle
+        set
+        segment_id = #{segmentId},
+        travel_time_t = #{travelTimet},
+        delay_t = #{delayT}
+        where
+        simtime = #{startTime}
+        and
+        id = #{id}
     </update>
-
 
     <select id="getAVG" resultType="liu.chun.dong.dao.entity.MiddleEntity">
         SELECT

@@ -41,7 +41,7 @@ public class CalcServiceImpl implements CalcService {
             //所有的segment信息
             List<SegmentInfoEntity> segmentInfoEntityList = segmentInfoMapper.getSegmentInfo();
             //循环所有的车辆
-            for (int i = 15363; i <= maxId; i++) {
+            for (int i = initCarId; i <= maxId; i++) {
                 //某一辆车，所有时刻的状态，按simtime升序排列
                 vehicleEntityListByCardId = vehicleMapper.getVehicleById(i);
                 VehicleEntity objectVehicle, moveVehicle = null, beforeMoveVehicle;
@@ -193,7 +193,7 @@ public class CalcServiceImpl implements CalcService {
         } else {
             dtime = 0.0D;
         }
-        travelTime = deltaT + dtime;
+        travelTime = deltaT + dtime * 3.6;
         result.setTravelTime(travelTime);
         result.setDelay(delayTm2 - delayTm1);
         return result;
