@@ -106,6 +106,7 @@ public class CalcServiceImpl implements CalcService {
             logger.error(e.toString());
             return false;
         }
+        logger.info("-----------Congratulations------It's Over-----------");
         return true;
     }
     @Override
@@ -122,24 +123,26 @@ public class CalcServiceImpl implements CalcService {
             MiddleEntity middleEntity;
             for (int i = 1; i <= 136; i++) {
                 for (int j = 1; j <= maxTime; j+=15) {
-                   /*
-                   map.put("segment",i);
-                   map.put("simTime",j);
-                   */
-                    middleEntity =  vehicleMiddleMapper.getAVG(i, j);
-                    if (middleEntity != null){
+
+                    map.put("segment",i);
+                    map.put("simTime",j);
+                    map.put("endTime",j+15);
+                    //middleEntity =  vehicleMiddleMapper.getAVGMap(map);
+                    middleEntity =  vehicleMiddleMapper.getAVG(i,j,j+15);
+                    if (middleEntity != null) {
                         oldTravelTime = travelTime = middleEntity.getTravel_time_ba();
                         oldDelay = delay = middleEntity.getDelay_ba();
                         vehicleEntity.setTravelTimet(travelTime);
                         vehicleEntity.setDelayT(delay);
-                    } else {
+                    /*} else {
                         vehicleEntity.setTravelTimet(oldTravelTime);
                         vehicleEntity.setDelayT(oldDelay);
+                    }*/
+                        vehicleEntity.setSegmentId(i);
+                        vehicleEntity.setSimTime(j);
+                        vehicleMapper.insert(vehicleEntity);
+                        logger.info("----insert the SegmentId: " + i + " and the simtime: " + j + " second----");
                     }
-                    vehicleEntity.setSegmentId(i);
-                    vehicleEntity.setSimTime(j);
-                    vehicleMapper.insert(vehicleEntity);
-                    logger.info("----insert the SegmentId: "+i+" and the simtime: "+j+" second----");
                 }
             }
         } catch (Exception e){

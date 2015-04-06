@@ -5,6 +5,8 @@ import liu.chun.dong.dao.entity.MiddleEntity;
 import liu.chun.dong.dao.entity.VehicleMiddleEntity;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Map;
+
 /**
  * @author wyliuchundong
  * @version 1.0.0
@@ -13,5 +15,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface VehicleMiddleMapper {
     int insert(VehicleMiddleEntity vehicleMiddleEntity);
-    MiddleEntity getAVG(@Param("segmentId")int segmentId, @Param("simTime")int simTime);
+    MiddleEntity getAVG(@Param("segmentId")int segmentId, @Param("simTime")int simTime, @Param("endTime")int endTime);
+    MiddleEntity getAVGMap(Map map);
 }

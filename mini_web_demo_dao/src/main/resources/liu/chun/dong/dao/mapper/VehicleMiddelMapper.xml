@@ -13,18 +13,7 @@
         time_in as timeIn,
         time_out as timeOut
 	</sql>
-    <select id="getAVG" resultType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
-        SELECT
-        AVG(travel_time_t) AS travel_time_ba,
-        AVG(delay_t) AS delay_ba
-        FROM
-        vehicle
-        WHERE
-        simtime = #{simTime}
-        AND
-        segment_id = #{segmentId}
-    </select>
-    <select id="getAVGMap" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
+    <select id="getAVG" resultType="liu.chun.dong.dao.entity.MiddleEntity">
         SELECT
         AVG(travel_time_t) AS travel_time_ba,
         AVG(delay_t) AS delay_ba
@@ -33,7 +22,20 @@
         WHERE
         simtime &gt;= #{simTime}
         and
-        simtime &lt; #{simTime}+15
+        simtime &lt; #{endTime}
+        AND
+        segment_id = #{segmentId}
+    </select>
+    <select id="getAVGMap" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.MiddleEntity">
+        SELECT
+        AVG(travel_time_t) AS travel_time_ba,
+        AVG(delay_t) AS delay_ba
+        FROM
+        vehicle_middle
+        WHERE
+        simtime &gt;= #{simTime}
+        and
+        simtime &lt; #{endTime}
         AND
         segment_id = #{segmentId}
     </select>
