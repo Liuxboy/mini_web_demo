@@ -28,8 +28,8 @@ public class VehicleMiddleEntity implements Serializable{
     private double linkpos;
     private int laneid;
     private String nextlink;
-    private Integer inqueue;
-    private Integer stops;
+    private int inqueue;
+    private int stops;
     private double delaytm;
     private double x;
     private double y;

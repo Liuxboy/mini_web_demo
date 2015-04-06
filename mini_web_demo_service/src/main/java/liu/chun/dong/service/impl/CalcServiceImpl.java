@@ -167,7 +167,7 @@ public class CalcServiceImpl implements CalcService {
                 int segmentId = middleEntity.getSegmentId();
 
                 map.put("id",vehicleId);
-                map.put("simtime", simtime);
+                map.put("simTime", simtime);
                 map.put("segmentId", segmentId);
 
                 VehicleEntity vehicleEntity = vehicleMapper.getVehicleByIdAndTimeAndSegment(map);
@@ -182,6 +182,8 @@ public class CalcServiceImpl implements CalcService {
                 vehicleMiddleEntity.setDelaytm(vehicleEntity.getDelaytm());
                 vehicleMiddleEntity.setX(vehicleEntity.getX());
                 vehicleMiddleEntity.setY(vehicleEntity.getY());
+                vehicleMiddleEntity.setInqueue(vehicleEntity.getInqueue());
+                vehicleMiddleEntity.setNextlink(vehicleEntity.getNextlink());
 
                 vehicleMiddleEntity.setVehicleId(vehicleId);
                 vehicleMiddleEntity.setSimTime(simtime);

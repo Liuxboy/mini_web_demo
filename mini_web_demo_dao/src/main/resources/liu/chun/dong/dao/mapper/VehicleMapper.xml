@@ -70,7 +70,7 @@
         FROM
         vehicle
         WHERE
-        AND id=#{id}
+        id=#{id}
         AND simtime=#{simTime}
         AND segment_id=#{segmentId}
     </select>

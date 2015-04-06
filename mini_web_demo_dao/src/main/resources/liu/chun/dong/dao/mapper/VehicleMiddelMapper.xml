@@ -70,8 +70,9 @@
     </insert>
     <update id="update" parameterType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
         UPDATE
+        vehicle_middle
         SET
-        card_type =#{cardType},
+        car_type =#{carType},
         speed =#{speed},
         desspeed =#{desspeed},
         linkid =#{linkid},
