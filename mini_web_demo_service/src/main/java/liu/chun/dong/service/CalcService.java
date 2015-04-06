@@ -7,6 +7,7 @@ package liu.chun.dong.service;
  * @comment CalcService
  */
 public interface CalcService {
-    public boolean calcVehicleTravelTimeAndDelay();
-    public boolean calcSegmentTravelTimeAndDelay();
+    boolean calcVehicleTravelTimeAndDelay();
+    boolean calcSegmentTravelTimeAndDelay();
+    boolean updateVehicle();
 }

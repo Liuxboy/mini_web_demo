@@ -153,6 +153,51 @@ public class CalcServiceImpl implements CalcService {
         return true;
     }
 
+
+    @Override
+    public boolean updateVehicle() {
+        try {
+            List<VehicleMiddleEntity> vehicleEntityList = vehicleMiddleMapper.getVehicleMiddleList();
+            //循环所有的车辆
+            for (VehicleMiddleEntity middleEntity : vehicleEntityList) {
+                VehicleMiddleEntity vehicleMiddleEntity = new VehicleMiddleEntity();
+                Map<String, Integer> map = new HashMap<String, Integer>();
+                int vehicleId = middleEntity.getVehicleId();
+                int simtime = middleEntity.getSimTime();
+                int segmentId = middleEntity.getSegmentId();
+
+                map.put("id",vehicleId);
+                map.put("simtime", simtime);
+                map.put("segmentId", segmentId);
+
+                VehicleEntity vehicleEntity = vehicleMapper.getVehicleByIdAndTimeAndSegment(map);
+
+                vehicleMiddleEntity.setCarType(vehicleEntity.getCarType());
+                vehicleMiddleEntity.setSpeed(vehicleEntity.getSpeed());
+                vehicleMiddleEntity.setDesspeed(vehicleEntity.getDesspeed());
+                vehicleMiddleEntity.setLinkid(vehicleEntity.getLinkid());
+                vehicleMiddleEntity.setLinkpos(vehicleEntity.getLinkpos());
+                vehicleMiddleEntity.setLaneid(vehicleEntity.getLaneid());
+                vehicleMiddleEntity.setStops(vehicleEntity.getStops());
+                vehicleMiddleEntity.setDelaytm(vehicleEntity.getDelaytm());
+                vehicleMiddleEntity.setX(vehicleEntity.getX());
+                vehicleMiddleEntity.setY(vehicleEntity.getY());
+
+                vehicleMiddleEntity.setVehicleId(vehicleId);
+                vehicleMiddleEntity.setSimTime(simtime);
+                vehicleMiddleEntity.setSegmentId(segmentId);
+
+                vehicleMiddleMapper.update(vehicleMiddleEntity);
+                logger.info("-----update the CardId:", vehicleEntity.getId(), " simtime:",vehicleEntity.getSimTime(),"-------");
+            }
+        } catch (Exception e){
+            logger.error(e.toString());
+            return false;
+        }
+        logger.info("-----------Congratulations------It's Over-----------");
+        return true;
+    }
+
     /**
      * 根据linkId匹配segment中的startLink匹配出可能所在的segment集
      * @param startLink

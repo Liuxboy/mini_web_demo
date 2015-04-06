@@ -5,14 +5,20 @@
 <mapper namespace="liu.chun.dong.dao.mapper.VehicleMiddleMapper">
     <sql id="selectColumns">
         id as id,
-        simtime as simtime,
+        simtime as simTime,
         segment_id as segmentId,
-        vehicle_id as vehicleId,
-        travel_time_t as travelTimet,
-        delay_t as delayT,
-        time_in as timeIn,
-        time_out as timeOut
+        vehicle_id as vehicleId
 	</sql>
+
+    <select id="getVehicleMiddleList" resultType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
+        SELECT
+        <include refid="selectColumns"/>
+        FROM
+        vehicle_middle
+        ORDER BY
+        simtime ASC
+    </select>
+
     <select id="getAVG" resultType="liu.chun.dong.dao.entity.MiddleEntity">
         SELECT
         AVG(travel_time_t) AS travel_time_ba,
@@ -62,5 +68,27 @@
         #{timeOut}
         )
     </insert>
+    <update id="update" parameterType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
+        UPDATE
+        SET
+        card_type =#{cardType},
+        speed =#{speed},
+        desspeed =#{desspeed},
+        linkid =#{linkid},
+        linkpos =#{linkpos},
+        laneid =#{laneid},
+        nextlink =#{nextlink},
+        inqueue =#{inqueue},
+        stops =#{stops},
+        delaytm =#{delaytm},
+        x =#{x},
+        y =#{y}
+        WHERE
+        simtime=#{simTime}
+        AND
+        segment_id=#{segmentId}
+        AND
+        vehicle_id=#{vehicleId}
+    </update>
 
 </mapper>

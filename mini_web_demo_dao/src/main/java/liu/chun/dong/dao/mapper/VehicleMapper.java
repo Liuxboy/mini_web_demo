@@ -36,6 +36,13 @@ public interface VehicleMapper {
     List<VehicleEntity> getVehicleByIdAndTime(Map<String, Integer> map);
 
     /**
+     * 某车某时刻某segment的记录
+     * @param map
+     * @return
+     */
+    VehicleEntity getVehicleByIdAndTimeAndSegment(Map<String, Integer> map);
+
+    /**
      * 获取最大的车id
      * @return
      */

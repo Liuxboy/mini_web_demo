@@ -20,5 +20,9 @@
   <span>计算Segment TravelTime和Delay</span>
   <button style="color: green" type="submit">计算</button>
 </form>
+<form method="POST" action="/minidemo/updateVehicle">
+  <span>更新Vehicle</span>
+  <button style="color: green" type="submit">更新Vehicle</button>
+</form>
 </body>
 </html>
