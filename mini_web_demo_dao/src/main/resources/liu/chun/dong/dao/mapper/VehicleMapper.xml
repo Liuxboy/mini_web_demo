@@ -95,11 +95,6 @@
         MAX(id)
         FROM vehicle;
     </select>
-    <select id="getMaxTime" resultType="Integer">
-        SELECT
-        MAX(simtime)
-        FROM vehicle;
-    </select>
     <select id="getVehicleByTimeAndLink" parameterType="Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
         SELECT
         <include refid="selectColumns" />

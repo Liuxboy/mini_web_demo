@@ -113,7 +113,7 @@ public class CalcServiceImpl implements CalcService {
     @Override
     public boolean calcSegmentTravelTimeAndDelay() {
         try {
-            int maxTime = vehicleMapper.getMaxTime();
+            int maxTime = vehicleMiddleMapper.getMaxTime();
             logger.info("the maxTime: ", maxTime);
             //所有的segment信息
             List<VehicleEntity> list;

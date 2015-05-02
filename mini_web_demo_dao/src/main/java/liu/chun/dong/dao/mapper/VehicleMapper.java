@@ -19,10 +19,13 @@ public interface VehicleMapper {
 
     /**
      * 根据车辆id选出该车所通的link
+     *
      * @param id
+     *
      * @return
      */
     List<VehicleEntity> getVehicleById(Integer id);
+
     /**
      * 根据时刻获取车辆所通过的link
      */
@@ -30,27 +33,28 @@ public interface VehicleMapper {
 
     /**
      * 某车某时刻的记录
+     *
      * @param map
+     *
      * @return
      */
     List<VehicleEntity> getVehicleByIdAndTime(Map<String, Integer> map);
 
     /**
      * 某车某时刻某segment的记录
+     *
      * @param map
+     *
      * @return
      */
     VehicleEntity getVehicleByIdAndTimeAndSegment(Map<String, Integer> map);
 
     /**
      * 获取最大的车id
+     *
      * @return
      */
     Integer getMaxVehicleId();
-    /**
-     * 获取最大的时刻
-     */
-    Integer getMaxTime();
 
     /**
      * 某一时刻，某link上面的车辆信息
@@ -67,7 +71,7 @@ public interface VehicleMapper {
      */
     List<VehicleEntity> getVehicleListByTimeAndSegment(Map<String, Integer> map);
 
-    MiddleEntity getAVG(@Param("segmentId")int segmentId, @Param("simTime")int simTime);
+    MiddleEntity getAVG(@Param("segmentId") int segmentId, @Param("simTime") int simTime);
 
     MiddleEntity getAVGMap(Map map);
 

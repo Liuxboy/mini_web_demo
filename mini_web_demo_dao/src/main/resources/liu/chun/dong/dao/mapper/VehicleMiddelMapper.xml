@@ -45,6 +45,11 @@
         AND
         segment_id = #{segmentId}
     </select>
+    <select id="getMaxTime" resultType="Integer">
+        SELECT
+        MAX(simtime)
+        FROM vehicle_travel_time_delay;
+    </select>
     <insert id="insert" parameterType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
         insert into
         vehicle_middle
