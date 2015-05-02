@@ -36,11 +36,11 @@ public class CalcServiceImpl implements CalcService {
     private SegmentInfoMapper segmentInfoMapper;
 
     @Override
-    public boolean calcVehicleTravelTimeAndDelay(){
+    public boolean calcVehicleTravelTimeAndDelay() {
         final int initCarId = 6;
         try {
             int maxId = vehicleMapper.getMaxVehicleId();
-            logger.info("最大车id：",maxId);
+            logger.info("最大车id：", maxId);
             List<VehicleEntity> vehicleEntityListByCardId;
             //所有的segment信息
             List<SegmentInfoEntity> segmentInfoEntityList = segmentInfoMapper.getSegmentInfo();
@@ -52,14 +52,14 @@ public class CalcServiceImpl implements CalcService {
                 SegmentInfoEntity inSegment = null;
                 if (vehicleEntityListByCardId != null && vehicleEntityListByCardId.size() > 0) {
                     int recordNum = vehicleEntityListByCardId.size();
-                    int step = 1, timeIn = 0,timeOut = 1;
+                    int step = 1, timeIn = 0, timeOut = 1;
                     for (int j = 0; j < recordNum; j += step) {
                         //记下该时刻的车辆信息
                         objectVehicle = vehicleEntityListByCardId.get(j);
                         //通过startLink确定车辆可能存在的segment集
                         List<SegmentInfoEntity> maybeInSegmentListByStartLink = maybeInSegmentList(objectVehicle.getLinkid(), segmentInfoEntityList);
                         //如果可能存在的segment集大于1,则需从后面的时刻判断其具体所在的segment
-                        if (maybeInSegmentListByStartLink.size() > 1){
+                        if (maybeInSegmentListByStartLink.size() > 1) {
                             timeIn = j;
                             //遍历其后时间的，找到终点
                             for (int k = j + 1; k < recordNum; k++) {
@@ -69,11 +69,11 @@ public class CalcServiceImpl implements CalcService {
                                 int movelinkId = moveVehicle.getLinkid();
                                 inSegment = inSegment(beforeLinkId, maybeInSegmentListByStartLink);
                                 //查询到segment且 当moveVehicle的linkId与segment的nextlink相同，则说明已经刚好驶出该segment，跳出循环计算
-                                if(inSegment != null && movelinkId == inSegment.getNextLink()){
+                                if (inSegment != null && movelinkId == inSegment.getNextLink()) {
                                     timeOut = k;
                                     break;
                                 }
-                                if (k == recordNum-1)
+                                if (k == recordNum - 1)
                                     timeOut = k;
                             }
                         } else {
@@ -97,38 +97,39 @@ public class CalcServiceImpl implements CalcService {
                             vehicleMiddleMapper.insert(vehicleEntity);
                             inSegment = null;
                             step = timeOut - timeIn;
-                            logger.info("-----input the CardId: ",id,"-------");
+                            logger.info("-----input the CardId: ", id, "-------");
                         }
                     }
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString());
             return false;
         }
         logger.info("-----------Congratulations------It's Over-----------");
         return true;
     }
+
     @Override
-    public boolean calcSegmentTravelTimeAndDelay(){
+    public boolean calcSegmentTravelTimeAndDelay() {
         try {
             int maxTime = vehicleMapper.getMaxTime();
-            logger.info("the maxTime: ",maxTime);
+            logger.info("the maxTime: ", maxTime);
             //所有的segment信息
             List<VehicleEntity> list;
-            Map<String,Integer> map = new HashMap<String,Integer>();
+            Map<String, Integer> map = new HashMap<String, Integer>();
             VehicleEntity vehicleEntity = new VehicleEntity();
             double travelTime = 0.0, delay = 0.0;
             double oldTravelTime = 0.0, oldDelay = 0.0;
             MiddleEntity middleEntity;
             for (int i = 1; i <= 136; i++) {
-                for (int j = 1; j <= maxTime; j+=15) {
+                for (int j = 1; j <= maxTime; j += 15) {
 
-                    map.put("segment",i);
-                    map.put("simTime",j);
-                    map.put("endTime",j+15);
+                    map.put("segment", i);
+                    map.put("simTime", j);
+                    map.put("endTime", j + 15);
                     //middleEntity =  vehicleMiddleMapper.getAVGMap(map);
-                    middleEntity =  vehicleMiddleMapper.getAVG(i,j,j+15);
+                    middleEntity = vehicleMiddleMapper.getAVG(i, j, j + 15);
                     if (middleEntity != null) {
                         oldTravelTime = travelTime = middleEntity.getTravel_time_ba();
                         oldDelay = delay = middleEntity.getDelay_ba();
@@ -145,7 +146,7 @@ public class CalcServiceImpl implements CalcService {
                     }
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString());
             return false;
         }
@@ -166,12 +167,12 @@ public class CalcServiceImpl implements CalcService {
                 int simtime = middleEntity.getSimTime();
                 int segmentId = middleEntity.getSegmentId();
 
-                map.put("id",vehicleId);
+                map.put("id", vehicleId);
                 map.put("simTime", simtime);
                 map.put("segmentId", segmentId);
                 long start = System.currentTimeMillis();
                 VehicleEntity vehicleEntity = vehicleMapper.getVehicleByIdAndTimeAndSegment(map);
-                System.out.println("Elasped time: " +(System.currentTimeMillis()-start));
+                System.out.println("Elasped time: " + (System.currentTimeMillis() - start));
 
                 vehicleMiddleEntity.setCarType(vehicleEntity.getCarType());
                 vehicleMiddleEntity.setSpeed(vehicleEntity.getSpeed());
@@ -191,9 +192,9 @@ public class CalcServiceImpl implements CalcService {
                 vehicleMiddleEntity.setSegmentId(segmentId);
 
                 vehicleMiddleMapper.update(vehicleMiddleEntity);
-                logger.info("-----update the CardId:", vehicleEntity.getId(), " simtime:",vehicleEntity.getSimTime(),"-------");
+                logger.info("-----update the CardId:", vehicleEntity.getId(), " simtime:", vehicleEntity.getSimTime(), "-------");
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString());
             return false;
         }
@@ -203,25 +204,28 @@ public class CalcServiceImpl implements CalcService {
 
     /**
      * 根据linkId匹配segment中的startLink匹配出可能所在的segment集
+     *
      * @param startLink
      * @param segmentInfoEntityList
+     *
      * @return
      */
-    private List<SegmentInfoEntity> maybeInSegmentList(int startLink, List<SegmentInfoEntity> segmentInfoEntityList){
+    private List<SegmentInfoEntity> maybeInSegmentList(int startLink, List<SegmentInfoEntity> segmentInfoEntityList) {
         List<SegmentInfoEntity> resultSegmentList = new ArrayList<SegmentInfoEntity>();
-        for (SegmentInfoEntity segmentInfoEntity : segmentInfoEntityList){
-            if (segmentInfoEntity.getStartLink() == startLink){
+        for (SegmentInfoEntity segmentInfoEntity : segmentInfoEntityList) {
+            if (segmentInfoEntity.getStartLink() == startLink) {
                 resultSegmentList.add(segmentInfoEntity);
             }
         }
         return resultSegmentList;
     }
+
     /**
      * 根据linkId匹配segment中的endLink匹配真正所在的segment
      */
-    private SegmentInfoEntity inSegment(int endLink, List<SegmentInfoEntity> maybeInSegmentList){
+    private SegmentInfoEntity inSegment(int endLink, List<SegmentInfoEntity> maybeInSegmentList) {
         SegmentInfoEntity resultSegment = null;
-        for (SegmentInfoEntity entity : maybeInSegmentList){
+        for (SegmentInfoEntity entity : maybeInSegmentList) {
             if (entity.getEndLink() == endLink)
                 resultSegment = entity;
         }
@@ -232,7 +236,7 @@ public class CalcServiceImpl implements CalcService {
     /**
      * 计算车辆某时的travelTime和delay
      */
-    private Result calcVehicleTravelTimeAndDelay(VehicleEntity objectVehicle, VehicleEntity moveVehicle){
+    private Result calcVehicleTravelTimeAndDelay(VehicleEntity objectVehicle, VehicleEntity moveVehicle) {
         Result result = new Result();
         double travelTime;
         int timeIn = objectVehicle.getSimTime();
@@ -246,7 +250,7 @@ public class CalcServiceImpl implements CalcService {
         double delayTm2 = moveVehicle.getDelaytm();
         double deltaT = timeOut - timeIn;
         double dtime;
-        if (Math.abs(v1 - 0.0D) > 0.000001 && Math.abs(v2-0.0D) > 0.000001) {
+        if (Math.abs(v1 - 0.0D) > 0.000001 && Math.abs(v2 - 0.0D) > 0.000001) {
             dtime = d1 / v1 - d2 / v2;
         } else {
             dtime = 0.0D;
@@ -258,7 +262,7 @@ public class CalcServiceImpl implements CalcService {
     }
 }
 
-class Result{
+class Result {
     private double travelTime;
     private double delay;
 

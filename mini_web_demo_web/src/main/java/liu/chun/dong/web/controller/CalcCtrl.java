@@ -39,7 +39,7 @@ public class CalcCtrl {
             return new ModelAndView("/fail");
     }
 
-    //@RequestMapping(value = "/calcSegment", method = RequestMethod.POST)
+    @RequestMapping(value = "/calcSegment", method = RequestMethod.POST)
     public ModelAndView calcSegment(HttpServletRequest request, HttpServletResponse response) {
         boolean result = calcService.calcSegmentTravelTimeAndDelay();
 
@@ -48,7 +48,7 @@ public class CalcCtrl {
         else
             return new ModelAndView("/fail");
     }
-    @RequestMapping(value = "/updateVehicle", method = RequestMethod.POST)
+    //@RequestMapping(value = "/updateVehicle", method = RequestMethod.POST)
     public ModelAndView updateVehicle(HttpServletRequest request, HttpServletResponse response) {
         boolean result = calcService.updateVehicle();
 

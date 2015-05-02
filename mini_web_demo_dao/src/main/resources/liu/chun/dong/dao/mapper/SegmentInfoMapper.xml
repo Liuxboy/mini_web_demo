@@ -17,14 +17,14 @@
         select
         <include refid="selectColumns"/>
         from
-        segment_infromation
+        segment
     </select>
 
     <select id="getSegmentInfoByLink" parameterType="Map" resultType="liu.chun.dong.dao.entity.SegmentInfoEntity">
         select
         <include refid="selectColumns"/>
         from
-        segment_infromation
+        segment
         WHERE
         <if test="startLink!=null">
             AND start_link = #{startLink}

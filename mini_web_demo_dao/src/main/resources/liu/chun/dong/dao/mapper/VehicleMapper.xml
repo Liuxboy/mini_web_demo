@@ -167,7 +167,7 @@
     </select>
     <insert id="insert" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
         insert into
-        middle
+        segment_travel_time_delay
         (
         simtime,
         segment_id,
