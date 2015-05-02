@@ -169,8 +169,9 @@ public class CalcServiceImpl implements CalcService {
                 map.put("id",vehicleId);
                 map.put("simTime", simtime);
                 map.put("segmentId", segmentId);
-
+                long start = System.currentTimeMillis();
                 VehicleEntity vehicleEntity = vehicleMapper.getVehicleByIdAndTimeAndSegment(map);
+                System.out.println("Elasped time: " +(System.currentTimeMillis()-start));
 
                 vehicleMiddleEntity.setCarType(vehicleEntity.getCarType());
                 vehicleMiddleEntity.setSpeed(vehicleEntity.getSpeed());
@@ -183,7 +184,7 @@ public class CalcServiceImpl implements CalcService {
                 vehicleMiddleEntity.setX(vehicleEntity.getX());
                 vehicleMiddleEntity.setY(vehicleEntity.getY());
                 vehicleMiddleEntity.setInqueue(vehicleEntity.getInqueue());
-                vehicleMiddleEntity.setNextlink(vehicleEntity.getNextlink());
+                vehicleMiddleEntity.setNextlink(vehicleEntity.getNextlink().trim());
 
                 vehicleMiddleEntity.setVehicleId(vehicleId);
                 vehicleMiddleEntity.setSimTime(simtime);

@@ -72,7 +72,7 @@
         WHERE
         id=#{id}
         AND simtime=#{simTime}
-        AND segment_id=#{segmentId}
+        <!--- AND segment_id=#{segmentId} -->
     </select>
 
     <select id="getVehicleListByTimeAndSegment" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
