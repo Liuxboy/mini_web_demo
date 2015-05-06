@@ -17,7 +17,6 @@ import java.util.Map;
 public interface VehicleMiddleMapper {
     int insert(VehicleMiddleEntity vehicleMiddleEntity);
     MiddleEntity getAVG(@Param("segmentId")int segmentId, @Param("simTime")int simTime, @Param("endTime")int endTime);
-    MiddleEntity getAVGMap(Map map);
     Integer getMaxTime();
     List<VehicleMiddleEntity> getVehicleMiddleList();
     int update(VehicleMiddleEntity vehicleMiddleEntity);

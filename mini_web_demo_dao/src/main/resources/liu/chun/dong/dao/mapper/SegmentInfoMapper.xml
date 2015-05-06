@@ -19,18 +19,4 @@
         from
         segment
     </select>
-
-    <select id="getSegmentInfoByLink" parameterType="Map" resultType="liu.chun.dong.dao.entity.SegmentInfoEntity">
-        select
-        <include refid="selectColumns"/>
-        from
-        segment
-        WHERE
-        <if test="startLink!=null">
-            AND start_link = #{startLink}
-        </if>
-        <if test="endLink!=null">
-            AND end_link = #{endLink}
-        </if>
-    </select>
 </mapper>

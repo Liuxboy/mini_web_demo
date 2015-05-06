@@ -23,13 +23,6 @@
         segment_id as segmentId
 	</sql>
 
-    <select id="getVehicleList" resultType="liu.chun.dong.dao.entity.VehicleEntity">
-        select
-        <include refid="selectColumns"/>
-        from
-        vehicle
-    </select>
-
     <select id="getVehicleById" parameterType="java.lang.Integer" resultType="liu.chun.dong.dao.entity.VehicleEntity">
         select
         <include refid="selectColumns"/>
@@ -40,30 +33,6 @@
         ORDER BY simtime ASC
     </select>
 
-    <select id="getVehicleByTime" parameterType="java.lang.Integer" resultType="liu.chun.dong.dao.entity.VehicleEntity">
-        select
-        <include refid="selectColumns"/>
-        from
-        vehicle
-        where
-        simtime=#{simTime}
-    </select>
-
-    <select id="getVehicleByIdAndTime" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
-        select
-        <include refid="selectColumns"/>
-        from
-        vehicle
-        where
-        true
-        <if test="id != null">
-            and id=#{id}
-        </if>
-        <if test="simTime != null">
-            and simtime=#{simTime}
-        </if>
-    </select>
-
     <select id="getVehicleByIdAndTimeAndSegment" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
         select
         <include refid="selectColumns"/>
@@ -72,22 +41,6 @@
         WHERE
         id=#{id}
         AND simtime=#{simTime}
-        <!--- AND segment_id=#{segmentId} -->
-    </select>
-
-    <select id="getVehicleListByTimeAndSegment" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
-        select
-        <include refid="selectColumns"/>
-        from
-        vehicle
-        where
-        true
-        <if test="simTime != null">
-            and simtime=#{simTime}
-        </if>
-        <if test="segmentId != null">
-            and segment_id=#{segmentId}
-        </if>
     </select>
 
     <select id="getMaxVehicleId" resultType="Integer">
@@ -95,71 +48,7 @@
         MAX(id)
         FROM vehicle;
     </select>
-    <select id="getVehicleByTimeAndLink" parameterType="Map" resultType="liu.chun.dong.dao.entity.VehicleEntity">
-        SELECT
-        <include refid="selectColumns" />
-        FROM
-        vehicle
-        WHERE
-        true
-        <if test="simTime != null">
-            and simtime = #{simTime}
-        </if>
-        <if test="linkid != null">
-            and linkid = #{linkid}
-        </if>
 
-    </select>
-    <!--第一次计算vehicle-->
-    <!--<update id="update" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
-        update
-        vehicle
-        set
-        segment_id = #{segmentId},
-        travel_time_t = #{travelTimet},
-        delay_t = #{delayT}
-        where
-        simtime &gt;= #{startTime}
-        and
-        simtime &lt; #{endTime}
-        and
-        id = #{id}
-    </update>-->
-    <update id="update" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
-        update
-        vehicle
-        set
-        segment_id = #{segmentId},
-        travel_time_t = #{travelTimet},
-        delay_t = #{delayT}
-        where
-        simtime = #{startTime}
-        and
-        id = #{id}
-    </update>
-
-    <select id="getAVG" resultType="liu.chun.dong.dao.entity.MiddleEntity">
-        SELECT
-        AVG(travel_time_t) AS travel_time_ba,
-        AVG(delay_t) AS delay_ba
-        FROM
-        vehicle
-        WHERE
-        simtime = #{simTime}
-        AND
-        segment_id = #{segmentId}
-    </select>
-    <select id="getAVGMap" parameterType="java.util.Map" resultType="liu.chun.dong.dao.entity.MiddleEntity">
-        SELECT
-        AVG(travel_time_t) AS travel_time_ba,
-        AVG(delay_t) AS delay_ba
-        FROM
-        vehicle
-        WHERE
-        simtime = #{simTime}
-        AND
-        segment_id = #{segmentId}
-    </select>
     <insert id="insert" parameterType="liu.chun.dong.dao.entity.VehicleEntity">
         insert into
         segment_travel_time_delay
