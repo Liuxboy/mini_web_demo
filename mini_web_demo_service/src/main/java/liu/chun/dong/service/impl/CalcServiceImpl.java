@@ -116,11 +116,9 @@ public class CalcServiceImpl implements CalcService {
             int maxTime = vehicleMiddleMapper.getMaxTime();
             logger.info("the maxTime: ", maxTime);
             //所有的segment信息
-            List<VehicleEntity> list;
             Map<String, Integer> map = new HashMap<String, Integer>();
             VehicleEntity vehicleEntity = new VehicleEntity();
             double travelTime = 0.0, delay = 0.0;
-            double oldTravelTime = 0.0, oldDelay = 0.0;
             MiddleEntity middleEntity;
             for (int i = 1; i <= 136; i++) {
                 for (int j = 1; j <= maxTime; j += 15) {
@@ -128,17 +126,10 @@ public class CalcServiceImpl implements CalcService {
                     map.put("segment", i);
                     map.put("simTime", j);
                     map.put("endTime", j + 15);
-                    //middleEntity =  vehicleMiddleMapper.getAVGMap(map);
                     middleEntity = vehicleMiddleMapper.getAVG(i, j, j + 15);
                     if (middleEntity != null) {
-                        oldTravelTime = travelTime = middleEntity.getTravel_time_ba();
-                        oldDelay = delay = middleEntity.getDelay_ba();
                         vehicleEntity.setTravelTimet(travelTime);
                         vehicleEntity.setDelayT(delay);
-                    /*} else {
-                        vehicleEntity.setTravelTimet(oldTravelTime);
-                        vehicleEntity.setDelayT(oldDelay);
-                    }*/
                         vehicleEntity.setSegmentId(i);
                         vehicleEntity.setSimTime(j);
                         vehicleMapper.insert(vehicleEntity);
