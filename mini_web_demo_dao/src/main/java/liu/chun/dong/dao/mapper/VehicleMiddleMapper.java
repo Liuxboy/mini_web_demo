@@ -6,7 +6,6 @@ import liu.chun.dong.dao.entity.VehicleMiddleEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author wyliuchundong

@@ -128,6 +128,8 @@ public class CalcServiceImpl implements CalcService {
                     map.put("endTime", j + 15);
                     middleEntity = vehicleMiddleMapper.getAVG(i, j, j + 15);
                     if (middleEntity != null) {
+                        travelTime = middleEntity.getTravel_time_ba();
+                        delay = middleEntity.getDelay_ba();
                         vehicleEntity.setTravelTimet(travelTime);
                         vehicleEntity.setDelayT(delay);
                         vehicleEntity.setSegmentId(i);

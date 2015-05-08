@@ -24,6 +24,11 @@
         <property name="transactionFactory">
             <bean class="org.mybatis.spring.transaction.SpringManagedTransactionFactory"/>
         </property>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:/liu/chun/dong/dao/mapper/*.xml</value>
+            </list>
+        </property>
     </bean>
 
     <!--配置Mybatis模版 -->
