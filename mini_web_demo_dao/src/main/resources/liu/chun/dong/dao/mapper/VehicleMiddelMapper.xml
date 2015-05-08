@@ -24,7 +24,7 @@
         AVG(travel_time_t) AS travel_time_ba,
         AVG(delay_t) AS delay_ba
         FROM
-        vehicle_travel_time_delay
+        vehicle_middle
         WHERE
         simtime &gt;= #{simTime}
         and
@@ -36,7 +36,7 @@
     <select id="getMaxTime" resultType="Integer">
         SELECT
         MAX(simtime)
-        FROM vehicle_travel_time_delay
+        FROM vehicle_middle
     </select>
 
     <insert id="insert" parameterType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
@@ -64,7 +64,7 @@
     </insert>
     <update id="update" parameterType="liu.chun.dong.dao.entity.VehicleMiddleEntity">
         UPDATE
-        vehicle_travel_time_delay
+        vehicle_middle
         SET
         car_type =#{carType},
         speed =#{speed},

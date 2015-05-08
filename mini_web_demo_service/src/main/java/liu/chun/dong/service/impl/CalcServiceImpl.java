@@ -136,6 +136,13 @@ public class CalcServiceImpl implements CalcService {
                         vehicleEntity.setSimTime(j);
                         vehicleMapper.insert(vehicleEntity);
                         logger.info("----insert the SegmentId: " + i + " and the simtime: " + j + " second----");
+                    } else {
+                        vehicleEntity.setTravelTimet(0.0);
+                        vehicleEntity.setDelayT(0.0);
+                        vehicleEntity.setSegmentId(i);
+                        vehicleEntity.setSimTime(j);
+                        vehicleMapper.insert(vehicleEntity);
+                        logger.info("----insert the SegmentId: " + i + " and the simtime: " + j + " second----");
                     }
                 }
             }
