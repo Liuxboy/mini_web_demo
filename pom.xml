@@ -41,6 +41,7 @@
         <log4j.version>1.2.16</log4j.version>
         <logback-version>1.0.13</logback-version>
 
+        <junit.version>4.8.1</junit.version>
         <org.mybatis.spring.version>1.1.1</org.mybatis.spring.version>
         <org.mybatis.version>3.1.1</org.mybatis.version>
         <ojdbc-version>11.2.0</ojdbc-version>
@@ -96,6 +97,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
                 <version>${version.spring}</version>
             </dependency>
@@ -123,6 +129,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${version.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
