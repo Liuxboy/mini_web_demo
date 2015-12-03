@@ -4,7 +4,6 @@ import liu.chun.dong.common.bean.MiniWebDemoCPMBean;
 import liu.chun.dong.common.config.MiniWebDemoCPConfig;
 import liu.chun.dong.common.util.JMXUtil;
 import liu.chun.dong.common.util.JdbcUtil;
-import liu.chun.dong.common.util.OracleUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -127,12 +126,6 @@ public class MiniWebDemoCP implements MiniWebDemoCPMBean {
                 throw new SQLException(e.toString(), e);
             }
         }
-        boolean isOracle10 = config.isOracle() && DriverManager.getDriver(config.getConnUrl()).getMajorVersion() == 10;
-        if (isOracle10 && config.isUseOracleImplicitPSCache()) {
-            config.getConnectionProperties().setProperty(OracleUtil.ORACLE_FREECACHE_PROPERTY_NAME, OracleUtil.ORACLE_FREECACHE_PROPERTY_VALUE_TRUE);
-        } else {
-            config.getConnectionProperties().remove(OracleUtil.ORACLE_FREECACHE_PROPERTY_NAME);
-        }
         if (inited.getAndSet(true)) {
             return;
         }
@@ -142,43 +135,6 @@ public class MiniWebDemoCP implements MiniWebDemoCPMBean {
                 newConnection(false);
             }
         }
-        //异步初始化最小连接（最小连接尚未建立，pool已经可用）的代码
-//        for (int i = 0; i < config.getMinConnections() && validConnectionNum.get() < config.getMinConnections(); i++) {
-//            if (validConnectionNum.incrementAndGet() <= config.getMinConnections()) {
-//                int connId = connectionNo.getAndIncrement();
-//                try {
-//                    PooledConnection pconn = new PooledConnection(this, connId);
-//                    validConnectionsPool.put(connId, pconn);
-//                    idleConnectionsId.push(connId);
-//                } catch (SQLException e) {
-//                    validConnectionNum.decrementAndGet();
-//                    throw e;
-//                }
-//            } else {
-//                validConnectionNum.decrementAndGet();
-//            }
-//        }
-        //同步初始化最小连接（最小连接尚未建立，pool不可用）的代码
-//        for (int i = 0; i < config.getMinConnections(); i++) {
-//            int connId = connectionNo.getAndIncrement();
-//
-//            //20130514 zy 修改当新建连接失败的时，清空连接池中所有的连接，以防连接泄露
-//            try {
-//                PooledConnection pconn = new PooledConnection(this, connId);
-//                validConnectionsPool.put(connId, pconn);
-//                idleConnectionsId.push(connId);
-//            } catch (SQLException e) {
-//                for (Map.Entry<Integer, PooledConnection> entry : validConnectionsPool.entrySet()) {
-//                    entry.getValue().close();
-//                }
-//                validConnectionsPool.clear();
-//                throw e;
-//            }
-//        }
-//        validConnectionNum.set(config.getMinConnections());
-//        if (config.isVerbose()) {
-//            log.info(poolName, " initial)", config.getMinConnections(), " connections to ", config.getConnUrl());
-//        }
 
         monitor = new CPMonitor();
         monitor.setName("CPM:" + poolName);

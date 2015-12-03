@@ -1,6 +1,5 @@
 package liu.chun.dong.web.interceptor;
 
-import liu.chun.dong.common.util.JsonUtil;
 import liu.chun.dong.common.cp.Logger;
 import liu.chun.dong.common.cp.LoggerFactory;
 import org.springframework.core.PriorityOrdered;

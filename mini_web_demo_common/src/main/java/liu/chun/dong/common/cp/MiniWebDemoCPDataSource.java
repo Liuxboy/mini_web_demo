@@ -11,11 +11,14 @@ import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Properties;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.logging.*;
+import java.util.logging.Logger;
 
 /**
  * @author wyliuchundong
@@ -35,6 +38,11 @@ public class MiniWebDemoCPDataSource extends MiniWebDemoCPConfig implements Data
 
     public void setLogWriter(PrintWriter out) throws SQLException {
         logWriter = out;
+    }
+
+    @Override
+    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+        return null;
     }
 
 //    public void setLoginTimeout(int seconds) throws SQLException {

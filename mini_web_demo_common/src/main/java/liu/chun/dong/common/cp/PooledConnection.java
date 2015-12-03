@@ -108,8 +108,9 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
         connectionName = pool.getPoolName() + "#" + connId;
         idleStatementsPool = new LinkedBlockingQueue<PooledStatement>(connectionPool.getConfig().getMaxStatements());
         activeStatementsPool = new ConcurrentHashMap<Integer, PooledStatement>(connectionPool.getConfig().getMaxStatements());
-        validPreStatementsPool = new LinkedHashMap<String, PooledPreparedStatement>(connectionPool.getConfig().getMaxPreStatements()+1, 0.75f, true) {
+        validPreStatementsPool = new LinkedHashMap<String, PooledPreparedStatement>(connectionPool.getConfig().getMaxPreStatements() + 1, 0.75f, true) {
             private static final long serialVersionUID = -5350521942562100031L;
+
             protected boolean removeEldestEntry(Map.Entry<String, PooledPreparedStatement> eldest) {
                 if (size() > connectionPool.getConfig().getMaxPreStatements()) {
                     PooledPreparedStatement ppstmt = eldest.getValue();
@@ -130,7 +131,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
     }
 
     private void makeRealConnection() throws SQLException {
-        if (! closed.get()) {
+        if (!closed.get()) {
             return;
         }
         long start = System.nanoTime();
@@ -244,7 +245,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
     private Connection buildProxy() {
         Class[] intfs = real_connection.getClass().getInterfaces();
         boolean impled = false; //是否实现了Connection接口
-        for (Class intf: intfs) {
+        for (Class intf : intfs) {
             if (intf.getName().equals(Connection.class.getName())) {
                 impled = true;
                 break;
@@ -314,9 +315,10 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
                 }
             } else if (mname.equals("setAutoCommit") && args.length == 1) {
                 ret = method.invoke(real_connection, args);
-                this.autoCommit = real_connection.getAutoCommit();;
+                this.autoCommit = real_connection.getAutoCommit();
+                ;
                 if (isVerbose()) {
-                    log.debug(connectionName, ".", mname, "(", args[0] ,") use ", (System.nanoTime() - invokeStart), " ns");
+                    log.debug(connectionName, ".", mname, "(", args[0], ") use ", (System.nanoTime() - invokeStart), " ns");
                 }
             } else {
                 ret = method.invoke(real_connection, args);
@@ -332,15 +334,16 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * 回收连接
+     *
      * @throws SQLException
      */
     protected void checkIn() throws SQLException {
-        if (! checkOut.getAndSet(false)) {
+        if (!checkOut.getAndSet(false)) {
             return;
         }
         timeCheckIn = System.currentTimeMillis();
         //if (! real_connection.getAutoCommit() && dirty) {
-        if (! autoCommit && dirty) {
+        if (!autoCommit && dirty) {
             //不是自动提交的时候，做关闭前的提交或回滚
             try {
                 if (connectionPool.getConfig().isCommitOnClose()) {
@@ -393,7 +396,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
                 }
                 pstmt = new PooledStatement(this, stmt, statementNo.getAndIncrement());
                 if (isVerbose()) {
-                    log.info(connectionName, " * createStatement(...)[", validStatementNum.get() ,"], use ", (System.nanoTime() - invokeStart), " ns");
+                    log.info(connectionName, " * createStatement(...)[", validStatementNum.get(), "], use ", (System.nanoTime() - invokeStart), " ns");
                 }
             } else {
                 validStatementNum.decrementAndGet();
@@ -426,7 +429,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
                 if (ppstmt.isDefaultResultSetType()) {
                     validPreStatementsPool.put((String) args[0], ppstmt);
                     if (isVerbose()) {
-                        log.info(connectionName, " * prepareStatement(", args[0], ")[", validPreStatementsPool.size() ,"], use ", (System.nanoTime() - invokeStart), " ns");
+                        log.info(connectionName, " * prepareStatement(", args[0], ")[", validPreStatementsPool.size(), "], use ", (System.nanoTime() - invokeStart), " ns");
                     }
                 }
             }
@@ -442,12 +445,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
     private PooledPreparedStatement getPooledPreparedStatement(PreparedStatement stmt, int stmtId, String sql) throws SQLException {
         PooledPreparedStatement result = null;
 
-        if (connectionPool.getConfig().isOracle()) {
-            result = new OraclePooledPreparedStatement(
-                    this, stmt, stmtId, sql, connectionPool.getConfig().isUseOracleImplicitPSCache());
-        } else {
-            result = new PooledPreparedStatement(this, stmt, stmtId, sql);
-        }
+        result = new PooledPreparedStatement(this, stmt, stmtId, sql);
 
         return result;
     }
@@ -470,7 +468,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
                 if (pcstmt.isDefaultResultSetType()) {
                     validPreStatementsPool.put((String) args[0], pcstmt);
                     if (isVerbose()) {
-                        log.info(connectionName, " * prepareCall(", args[0], ")[", validPreStatementsPool.size() ,"], use ", (System.nanoTime() - invokeStart), " ns");
+                        log.info(connectionName, " * prepareCall(", args[0], ")[", validPreStatementsPool.size(), "], use ", (System.nanoTime() - invokeStart), " ns");
                     }
                 }
             }
@@ -482,12 +480,13 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * 回收statement
+     *
      * @param pstmt
      */
     public void checkIn(PooledStatement pstmt) {
         activeStatementsPool.remove(pstmt.getStatementId());
         if (pstmt.isDefaultResultSetType()) {
-            if (! pstmt.isClosed()) {
+            if (!pstmt.isClosed()) {
                 idleStatementsPool.offer(pstmt);
             }
         } else {
@@ -498,6 +497,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * 回收PreparedStatement，与回收statement分开调用
+     *
      * @param ppstmt
      */
     public void checkIn(PooledPreparedStatement ppstmt) {
@@ -562,7 +562,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
         activeStatementsPool.clear();
         validPreStatementsPool.clear();
         try {
-            if (! autoCommit && dirty) {
+            if (!autoCommit && dirty) {
                 if (connectionPool.getConfig().isCommitOnClose()) {
                     real_connection.commit();
                     if (isVerbose()) {
@@ -599,6 +599,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * Return connectionId.
+     *
      * @return connectionId
      */
     public int getConnectionId() {
@@ -607,6 +608,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * Return connectionPool.
+     *
      * @return connectionPool
      */
     public MiniWebDemoCP getConnectionPool() {
@@ -615,6 +617,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * Return connectionName.
+     *
      * @return connectionName
      */
     public String getConnectionName() {
@@ -623,6 +626,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * Return checkOut.
+     *
      * @return checkOut
      */
     public boolean isCheckOut() {
@@ -639,6 +643,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * Return timeCheckIn.
+     *
      * @return timeCheckIn
      */
     public long getTimeCheckIn() {
@@ -647,6 +652,7 @@ public class PooledConnection implements InvocationHandler, PooledConnectionMBea
 
     /**
      * Return threadCheckOut.
+     *
      * @return threadCheckOut
      */
     public Thread getThreadCheckOut() {
