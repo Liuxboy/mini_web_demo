@@ -1,0 +1,73 @@
+@CHARSET "UTF-8";
+
+BODY {
+	FONT: 12px "Lucida Grande", Verdana, Lucida, Helvetica, Arial, "宋体",
+		sans-serif;
+	COLOR: #555;
+	line-height: 20px;
+}
+
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote
+	{
+	margin: 0;
+	padding: 0;
+}
+
+ul,ol {
+	list-style: none outside none;
+}
+
+a {
+	color: #2366A8;
+	text-decoration: none;
+}
+
+a.commlink {
+	color: #2366A8;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+table tr {
+	height: 25px;
+}
+
+.expansion,.none {
+	display: none;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.errorSpan,.errorMessage {
+	color: #FF0000;
+	padding: 2px 5px;
+}
+
+ul.errorMessage,ul.errorMessage li {
+	display: inline;
+}
+
+.ui-dialog-titlebar {
+	line-height: normal;
+}
+
+img {
+	border: none;
+}
+
+.ellipsis {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 200px;
+}
+
+/**dialog button container*/
+.ui-dialog .ui-dialog-buttonpane {
+	border-width: 0;
+}

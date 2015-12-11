@@ -1,6 +1,6 @@
 package mini.web.demo.test;
 
-import liu.chun.dong.service.CalcService;
+import com.github.liuxboy.mini.web.demo.service.CalcService;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

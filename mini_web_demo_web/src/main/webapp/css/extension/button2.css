@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+.button2 {
+	background: url(../../image/button2.gif) no-repeat scroll 0 0
+		transparent;
+	font-size: 14px;
+	font-weight: 700;
+	height: 31px;
+	line-height: 28px;
+	overflow: hidden;
+	text-align: center;
+	width: 85px;
+	float: left;
+}
+
+.button2 a {
+	color: #FFFFFF;
+	display: block;
+	letter-spacing: 5px;
+	padding-left: 5px;
+}

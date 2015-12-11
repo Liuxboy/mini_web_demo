@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+.listTab {
+	clear: both;
+	height: 32px;
+	line-height: 32px;
+}
+
+.listTab>* {
+	float: left;
+	position: relative;
+	top: 1px;
+	margin: 0;
+	margin-right: 8px;
+}
+
+.listTab dl {
+	float: left;
+	position: relative;
+	top: 1px;
+	margin: 0;
+	margin-right: 8px;
+}
+
+.listTab dl dt {
+	float: left;
+	height: 32px;
+	width: 3px;
+	background: url(../../image/taboffbtn.gif) no-repeat scroll right center
+		transparent;
+	z-index: expression(this.previousSibling ||(    this.id =    'firstDt'));
+}
+
+.listTab dl dt:first-child,.listTab dl dt#firstDt {
+	background: url(../../image/taboffbtn.gif) no-repeat scroll 0 0
+		transparent;
+}
+
+.listTab dl dd {
+	display: table-cell;
+	font-family: "宋体";
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.listTab dl dd {
+	background: url(../../image/taboffbtn.gif) repeat scroll -3px 0
+		transparent;
+	float: left;
+	height: 32px;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin-left: 0;
+}
+
+.listTab dl.focus dt:first-child,.listTab dl.focus dt#firstDt {
+	background: url(../../image/tabbtn.gif) no-repeat scroll 0 0 transparent;
+}
+
+.listTab dl.focus dd {
+	background: url(../../image/tabbtn.gif) repeat scroll -3px 0 transparent;
+	color: #003278;
+}
+
+.listTab dl.focus dt {
+	background: url(../../image/tabbtn.gif) no-repeat scroll right center
+		transparent;
+}

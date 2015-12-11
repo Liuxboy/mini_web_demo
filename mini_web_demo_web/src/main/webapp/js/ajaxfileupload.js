@@ -66,11 +66,11 @@ jQuery.extend({
 			jQuery.event.trigger( "ajaxStart" );
 		}            
         var requestDone = false;
-        // Create the liu.chun.dong.request object
+        // Create the request object
         var xml = {}   
         if ( s.global )
             jQuery.event.trigger("ajaxSend", [xml, s]);
-        // Wait for a liu.chun.dong.response to come back
+        // Wait for a response to come back
         var uploadCallback = function(isTimeout)
 		{			
 			var io = document.getElementById(frameId);
@@ -96,7 +96,7 @@ jQuery.extend({
                 var status;
                 try {
                     status = isTimeout != "timeout" ? "success" : "error";
-                    // Make sure that the liu.chun.dong.request was successful or notmodified
+                    // Make sure that the request was successful or notmodified
                     if ( status != "error" )
 					{
                         // process the data (runs the xml through httpData regardless of callback)
@@ -116,7 +116,7 @@ jQuery.extend({
                     jQuery.handleError(s, xml, status, e);
                 }
 
-                // The liu.chun.dong.request was completed
+                // The request was completed
                 if( s.global )
                     jQuery.event.trigger( "ajaxComplete", [xml, s] );
 
@@ -151,7 +151,7 @@ jQuery.extend({
         if ( s.timeout > 0 ) 
 		{
             setTimeout(function(){
-                // Check to see if the liu.chun.dong.request is still happening
+                // Check to see if the request is still happening
                 if( !requestDone ) uploadCallback( "timeout" );
             }, s.timeout);
         }

@@ -1,0 +1,153 @@
+.selectCity-clearfix {
+	OVERFLOW: hidden; FONT-SIZE: 0px; HEIGHT: 0px; CLEAR: both; LINE-HEIGHT: 0
+}
+.weight {
+	FONT-WEIGHT: bold
+}
+.selectCityWrap {
+	BORDER-TOP: #ffc264 1px solid; BORDER-RIGHT: #ffc264 1px solid; WIDTH: 641px; BACKGROUND: #fff; BORDER-BOTTOM: #ffc264 1px solid; BORDER-LEFT: #ffc264 1px solid; DISPLAY: none; -moz-border-radius: 5px; -webkit-border-radius: 5px; -webkit-box-shadow: 3px 3px #ffc264; -moz-box-shadow: 3px 3px #ffc264; box-shadow: 3px 3px #ffc264
+}
+.selectCityWrap .header {
+	HEIGHT: 32px; BACKGROUND: #feeed5; POSITION: relative; -moz-border-radius: 5px 5px 0 0; -webkit-border-radius: 5px 5px 0 0; border-radius: 5px 5px 0 0
+}
+.selectCityWrap .header STRONG {
+	FONT-WEIGHT: bold
+}
+.selectCityWrap .header H3.title {
+	FONT-SIZE: 14px; HEIGHT: 32px; FONT-WEIGHT: normal; COLOR: #000; TEXT-ALIGN: left; MARGIN-LEFT: 10px; LINE-HEIGHT: 32px
+}
+.selectCityWrap .header H3.title SPAN {
+	FONT-SIZE: 12px
+}
+.selectCityWrap .header H3.title SPAN .count {
+	COLOR: #ff6600
+}
+.selectCityWrap .headerCity {
+	HEIGHT: 35px; OVERFLOW-X: hidden; OVERFLOW-Y: auto;FONT-SIZE: 12px; PADDING-BOTTOM: 10px; PADDING-TOP: 0px; PADDING-LEFT: 10px; DISPLAY: none; LINE-HEIGHT: 20px; PADDING-RIGHT: 10px
+}
+.selectCityWrap .headerCity .selectedCity H4 {
+	FONT-SIZE: 12px; WIDTH: 60px; FLOAT: left; FONT-WEIGHT: normal; DISPLAY: inline
+}
+.selectCityWrap .headerCity .selectedCity .selectedCount {
+	WIDTH: 544px; FLOAT: left; DISPLAY: inline
+}
+.clearAllCity {
+	WHITE-SPACE: nowrap; FLOAT: left; MARGIN-LEFT: 10px
+}
+.selectCityWrap .headerCity .selectedCity .citys {
+	OVERFLOW: hidden; MARGIN-BOTTOM: 5px; HEIGHT: 15px; BACKGROUND: #61a3cf; WHITE-SPACE: nowrap; POSITION: relative; FLOAT: left; COLOR: #fff; PADDING-BOTTOM: 1px; PADDING-TOP: 1px; PADDING-LEFT: 1px; DISPLAY: inline; LINE-HEIGHT: 15px; PADDING-RIGHT: 16px; MARGIN-RIGHT: 5px
+}
+.selectCityWrap .headerCity .selectedCity .citys SPAN {
+	HEIGHT: 15px; BACKGROUND: #82c0ea; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 5px; DISPLAY: inline-block; PADDING-RIGHT: 4px
+}
+.selectCityWrap .headerCity .selectedCity .citys A.closeCity {
+	HEIGHT: 15px; WIDTH: 15px; BACKGROUND: url(/image/close1.gif) no-repeat; RIGHT: 0px; POSITION: absolute; DISPLAY: block; TOP: 1px
+}
+.selectCityWrap .content {
+	HEIGHT: 130px; OVERFLOW-X: hidden; OVERFLOW-Y: auto; BORDER-BOTTOM: #ffc264 1px solid; POSITION: relative; MARGIN: 9px 0px 9px 5px; Z-INDEX: 1000; _width: 635px
+}
+.selectCityWrap .content .hotCity .hotTitle {
+	PADDING-LEFT: 10px
+}
+.selectCityWrap .content .province .provinceTitle {
+	PADDING-LEFT: 10px
+}
+.selectCityWrap .content .oversea .overseaTitle {
+	PADDING-LEFT: 10px
+}
+.selectCityWrap .content .hotCity .hotTitle H5 {
+	FONT-SIZE: 14px; HEIGHT: 34px; FONT-WEIGHT: bold; LINE-HEIGHT: 34px
+}
+.selectCityWrap .content .province .provinceTitle H5 {
+	FONT-SIZE: 14px; HEIGHT: 34px; FONT-WEIGHT: bold; LINE-HEIGHT: 34px
+}
+.selectCityWrap .content .oversea .overseaTitle H5 {
+	FONT-SIZE: 14px; HEIGHT: 34px; FONT-WEIGHT: bold; LINE-HEIGHT: 34px
+}
+.selectCityWrap .content .hotCity .more {
+	OVERFLOW: hidden; HEIGHT: 13px; WIDTH: 13px; FLOAT: left; MARGIN-TOP: 11px; DISPLAY: block; MARGIN-RIGHT: 5px
+}
+.selectCityWrap .content .province .more {
+	OVERFLOW: hidden; HEIGHT: 13px; WIDTH: 13px; FLOAT: left; MARGIN-TOP: 11px; DISPLAY: block; MARGIN-RIGHT: 5px
+}
+.selectCityWrap .content .oversea .more {
+	OVERFLOW: hidden; HEIGHT: 13px; WIDTH: 13px; FLOAT: left; MARGIN-TOP: 11px; DISPLAY: block; MARGIN-RIGHT: 5px
+}
+.hotContent SPAN {
+	OVERFLOW: hidden; FONT-SIZE: 12px; HEIGHT: 26px; WIDTH: 76px; FLOAT: left; PADDING-TOP: 1px; PADDING-LEFT: 10px; DISPLAY: block; LINE-HEIGHT: 26px
+}
+.provinceContent SPAN {
+	OVERFLOW: hidden; FONT-SIZE: 12px; HEIGHT: 26px; WIDTH: 76px; FLOAT: left; PADDING-TOP: 1px; PADDING-LEFT: 10px; DISPLAY: block; LINE-HEIGHT: 26px
+}
+.overseaContent SPAN {
+	OVERFLOW: hidden; FONT-SIZE: 12px; HEIGHT: 26px; WIDTH: 76px; FLOAT: left; PADDING-TOP: 1px; PADDING-LEFT: 10px; DISPLAY: block; LINE-HEIGHT: 26px
+}
+.oversea SPAN {
+	OVERFLOW: hidden; FONT-SIZE: 12px; HEIGHT: 26px; WIDTH: 76px; FLOAT: left; PADDING-TOP: 1px; PADDING-LEFT: 10px; DISPLAY: block; LINE-HEIGHT: 26px
+}
+.checkable {
+	POSITION: relative; Z-INDEX: 999
+}
+.checkable-province {
+	Z-INDEX: 100
+}
+.overseaContent SPAN.width88 {
+	WIDTH: 88px
+}
+.cityProvince SPAN.width88 {
+	WIDTH: 88px
+}
+.hotContent SPAN INPUT {
+	VERTICAL-ALIGN: middle
+}
+.provinceContent SPAN INPUT {
+	VERTICAL-ALIGN: middle
+}
+.overseaContent SPAN INPUT {
+	VERTICAL-ALIGN: middle
+}
+.oversea SPAN INPUT {
+	VERTICAL-ALIGN: middle
+}
+.hotContent SPAN LABEL {
+	PADDING-LEFT: 5px; _vertical-align: -2px
+}
+.provinceContent SPAN LABEL {
+	PADDING-LEFT: 5px; _vertical-align: -2px
+}
+.overseaContent SPAN LABEL {
+	PADDING-LEFT: 5px; _vertical-align: -2px
+}
+.oversea SPAN LABEL {
+	PADDING-LEFT: 5px; _vertical-align: -2px
+}
+.provinceContent SPAN LABEL.ico {
+	BACKGROUND: url(/image/ico1.gif) no-repeat right 3px; PADDING-RIGHT: 12px
+}
+.hotContent SPAN LABEL.ico {
+	BACKGROUND: url(/image/ico1.gif) no-repeat right 3px; PADDING-RIGHT: 12px
+}
+.imgOpen {
+	BACKGROUND: url(/image/ico.gif) no-repeat 0px 0px
+}
+.imgClose {
+	BACKGROUND: url(/image/ico.gif) no-repeat 0px -13px
+}
+.footer {
+	MARGIN-BOTTOM: 10px; TEXT-ALIGN: center
+}
+.footer .confirm {
+	TEXT-DECORATION: none; HEIGHT: 22px; WIDTH: 72px; VERTICAL-ALIGN: middle; BACKGROUND: url(/image/buttons.gif) no-repeat 0px -22px; TEXT-ALIGN: center; DISPLAY: inline-block; LINE-HEIGHT: 22px
+}
+.footer .cancle {
+	TEXT-DECORATION: none; HEIGHT: 22px; WIDTH: 77px; VERTICAL-ALIGN: middle; BACKGROUND: url(/image/buttons.gif) no-repeat 0px 0px; TEXT-ALIGN: center; MARGIN-LEFT: 22px; DISPLAY: inline-block; LINE-HEIGHT: 22px
+}
+.cityProvince {
+	BORDER-TOP: #ffc264 1px solid; BORDER-RIGHT: #ffc264 1px solid; WIDTH: 100%; BACKGROUND: #fcf2e2; BORDER-BOTTOM: #ffc264 1px solid; POSITION: relative; FLOAT: left; BORDER-LEFT: #ffc264 1px solid; DISPLAY: none; TOP: -1px
+}
+.cityDistrict {
+	BORDER-TOP: #ffc264 1px solid; BORDER-RIGHT: #ffc264 1px solid; WIDTH: 100%; BACKGROUND: #fcf2e2; BORDER-BOTTOM: #ffc264 1px solid; POSITION: relative; FLOAT: left; BORDER-LEFT: #ffc264 1px solid; MARGIN-TOP: 10px; DISPLAY: none
+}
+.provinceContent .proviceCurrent {
+	OVERFLOW: hidden; BORDER-TOP: #ffc264 1px solid; HEIGHT: 25px; BORDER-RIGHT: #ffc264 1px solid; WIDTH: 74px; BACKGROUND: #fcf2e2; BORDER-BOTTOM: #ffc264 1px; BORDER-LEFT: #ffc264 1px solid
+}

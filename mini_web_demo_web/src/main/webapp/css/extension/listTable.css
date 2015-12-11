@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+.listTable {
+	width: 100%;
+	border: 1px solid #BDBCBD;
+	border-spacing: 0;
+}
+
+.listTable tr {
+	height: 25px;
+	line-height: 25px;
+}
+
+.listTable thead tr,.listTable #theadCell {
+	background: url(../../image/listbg2.gif) repeat-x scroll 0 bottom
+		transparent;
+}
+
+.listTable thead td,.listTable thead th {
+	background: url(../../image/listgap.gif) no-repeat scroll right center
+		transparent;
+	text-align: center;
+	z-index: expression(this.id =    'theadCell');
+}
+
+.listTable tbody {
+	
+}
+
+.listTable tfoot tr {
+	background: url(../../image/listbg3.gif) repeat-x scroll 0 0 transparent;
+}
+
+.listTable tfoot tr td>div {
+	float: right;
+	margin-right: 5px;
+}
+
+.listTable tfoot tr td .paging {
+	float: right;
+	margin-right: 5px;
+}

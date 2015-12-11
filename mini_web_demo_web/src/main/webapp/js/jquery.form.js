@@ -16,10 +16,10 @@
  *
  * ajaxSubmit accepts a single argument which can be either a success callback function
  * or an options Object.  If a function is provided it will be invoked upon successful
- * completion of the submit and will be passed the liu.chun.dong.response from the server.
+ * completion of the submit and will be passed the response from the server.
  * If an options Object is provided, the following attributes are supported:
  *
- *  target:   Identifies the element(s) in the page to be updated with the server liu.chun.dong.response.
+ *  target:   Identifies the element(s) in the page to be updated with the server response.
  *            This value may be specified as a jQuery selection string, a jQuery object,
  *            or a DOM element.
  *            default value: null
@@ -34,10 +34,10 @@
  *            default value: null
  *
  *  success:  Callback method to be invoked after the form has been successfully submitted
- *            and the liu.chun.dong.response has been returned from the server
+ *            and the response has been returned from the server
  *            default value: null
  *
- *  dataType: Expected dataType of the liu.chun.dong.response.  One of: null, 'xml', 'script', or 'json'
+ *  dataType: Expected dataType of the response.  One of: null, 'xml', 'script', or 'json'
  *            default value: null
  *
  *  semantic: Boolean flag indicating whether data must be submitted in semantic order (slower).
@@ -56,19 +56,19 @@
  *
  *     [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ]
  *
- * If a 'success' callback method is provided it is invoked after the liu.chun.dong.response has been returned
+ * If a 'success' callback method is provided it is invoked after the response has been returned
  * from the server.  It is passed the responseText or responseXML value (depending on dataType).
  * See jQuery.ajax for further details.
  *
  *
- * The dataType option provides a means for specifying how the server liu.chun.dong.response should be handled.
+ * The dataType option provides a means for specifying how the server response should be handled.
  * This maps directly to the jQuery.httpData method.  The following values are supported:
  *
- *      'xml':    if dataType == 'xml' the server liu.chun.dong.response is treated as XML and the 'success'
+ *      'xml':    if dataType == 'xml' the server response is treated as XML and the 'success'
  *                   callback method, if specified, will be passed the responseXML value
- *      'json':   if dataType == 'json' the server liu.chun.dong.response will be evaluted and passed to
+ *      'json':   if dataType == 'json' the server response will be evaluted and passed to
  *                   the 'success' callback, if specified
- *      'script': if dataType == 'script' the server liu.chun.dong.response is evaluated in the global context
+ *      'script': if dataType == 'script' the server response is evaluated in the global context
  *
  *
  * Note that it does not make sense to use both the 'target' and 'dataType' options.  If both
@@ -94,7 +94,7 @@
  * $('#myForm').ajaxSubmit(function(data) {
  *     alert('Form submit succeeded! Server returned: ' + data);
  * });
- * @desc Submit form and alert server liu.chun.dong.response
+ * @desc Submit form and alert server response
  *
  *
  * @example
@@ -102,7 +102,7 @@
  *     target: '#myTargetDiv'
  * };
  * $('#myForm').ajaxSubmit(options);
- * @desc Submit form and update page element with server liu.chun.dong.response
+ * @desc Submit form and update page element with server response
  *
  *
  * @example
@@ -112,7 +112,7 @@
  *     }
  * };
  * $('#myForm').ajaxSubmit(options);
- * @desc Submit form and alert the server liu.chun.dong.response
+ * @desc Submit form and alert the server response
  *
  *
  * @example
@@ -301,7 +301,7 @@ $.fn.ajaxSubmit = function(options) {
             var ok = true;
             try {
                 if (timedOut) throw 'timeout';
-                // extract the server liu.chun.dong.response from the iframe
+                // extract the server response from the iframe
                 var data, doc;
                 doc = io.contentWindow ? io.contentWindow.document : io.contentDocument ? io.contentDocument : io.document;
                 xhr.responseText = doc.body ? doc.body.innerHTML : null;
@@ -383,7 +383,7 @@ $.fn.ajaxSubmit.counter = 0; // used to create unique iframe ids
  *     target: '#myTargetDiv'
  * };
  * $('#myForm').ajaxSForm(options);
- * @desc Bind form's submit event so that 'myTargetDiv' is updated with the server liu.chun.dong.response
+ * @desc Bind form's submit event so that 'myTargetDiv' is updated with the server response
  *       when the form is submitted.
  *
  *
@@ -394,7 +394,7 @@ $.fn.ajaxSubmit.counter = 0; // used to create unique iframe ids
  *     }
  * };
  * $('#myForm').ajaxSubmit(options);
- * @desc Bind form's submit event so that server liu.chun.dong.response is alerted after the form is submitted.
+ * @desc Bind form's submit event so that server response is alerted after the form is submitted.
  *
  *
  * @example

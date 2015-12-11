@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+.searchArea {
+	border: 1px solid #BDBCBD;
+	border-bottom: none;
+	padding: 12px;
+	line-height: 25px;
+	display: none;
+}
+
+.searchArea ul {
+	list-style-type: none;
+	overflow: auto;
+	zoom: 1;
+	margin: 0;
+	padding-left: 0;
+}
+
+.searchArea ul li {
+	float: left;
+	padding: 0 5px;
+	white-space: nowrap;
+}
+
+.searchable {
+	margin-left: 20px;
+}
